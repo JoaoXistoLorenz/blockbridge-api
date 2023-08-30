@@ -21,7 +21,7 @@ export class $npmConfigName1693318436106 implements MigrationInterface {
       `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (6,'Polygon', 'MATIC', '', '', '')`,
     );
     await queryRunner.query(
-      `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (7,'Optimistic', 'OP', '', '', '')`,
+      `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (7,'Optimism', 'OP', '', '', '')`,
     );
     await queryRunner.query(
       `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (8,'Arbitrum', 'ARBI', '', '', '')`,
@@ -34,6 +34,9 @@ export class $npmConfigName1693318436106 implements MigrationInterface {
     );
     await queryRunner.query(
       `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (11,'Avalanche', 'AVAX', '', '', '')`,
+    );
+    await queryRunner.query(
+      `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (12,'Cartesi', 'CTSI', '', '', '')`,
     );
   }
 

@@ -39,6 +39,19 @@ export class PlataformaController {
     return new Response(plataforma, 'Plataforma Recuperada');
   }
 
+  @Get('/menulimit/:id_menu/:id_plataforma')
+  @SafeResponse()
+  public async findByTipoMenuLimit(
+    @Param('id_menu') idMenu: string,
+    @Param('id_plataforma') idPlataforma: string,
+  ): Promise<Response> {
+    const plataforma = await this.plataformaService.findByTipoMenuLimit(
+      parseInt(idMenu),
+      parseInt(idPlataforma),
+    );
+    return new Response(plataforma, 'Plataforma Recuperada');
+  }
+
   @Get('/escalabilidade/:id')
   @SafeResponse()
   public async findByTipoEscalabilidade(

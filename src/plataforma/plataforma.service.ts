@@ -30,6 +30,17 @@ export class PlataformaService {
     });
   }
 
+  /* Recupera por tipo menu */
+  async findByTipoMenuLimit(idMenu: number, idPlataforma: number): Promise<Plataforma[]> {
+    return await this.plataformaRepository.find({ 
+      where: {
+        id: Not(idPlataforma),
+        tipoMenu: { id: idMenu},
+      },
+      take: 6,
+    });
+  }
+
   /* Recupera por tipo escalabilidade */
   async findByTipoEscalabilidade(id: number): Promise<Plataforma[]> {
     return await this.plataformaRepository.find({ 
