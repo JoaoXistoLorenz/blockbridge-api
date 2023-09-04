@@ -6,11 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { PlataformaService } from './plataforma.service';
 import { Response } from '../configs/response.config';
 import { SafeResponse } from 'src/configs/utils.config';
 import { Plataforma } from './plataforma.entity';
+import { JwtAuthGuard } from 'src/auth/auth.guard';
 
 @Controller('plataforma')
 export class PlataformaController {
@@ -72,11 +74,8 @@ export class PlataformaController {
     );
   }
 
-  /* Filtrar por blockchain */
-  /* ========================================================= */
-
-  /* Somente adimin */
   @Post()
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async create(@Body() module: Plataforma): Promise<Response> {
     return new Response(
@@ -85,8 +84,8 @@ export class PlataformaController {
     );
   }
 
-  /* Somente admin */
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async update(
     @Param('id') id: string,
@@ -98,8 +97,8 @@ export class PlataformaController {
     );
   }
 
-  /* Somente admin */
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async delete(@Param('id') id: string): Promise<Response> {
     await this.plataformaService.delete(parseInt(id));

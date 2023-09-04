@@ -8,5 +8,6 @@ async function bootstrap() {
 
 // login
 // rotas com autenticação
-// arrumar o necessário
+// cadastrar plataforma-blockchain automatico
+// ver questão dos ids banco
 bootstrap();

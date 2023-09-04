@@ -21,6 +21,10 @@ export class UsuarioService {
     return await this.usuarioRepository.findOne({ where: { id } });
   }
 
+  async findByLogin(login: string): Promise<Usuario> {
+    return await this.usuarioRepository.findOne({ where: { login } });
+  }
+
   /* Cria */
   async create(newUsuario: Usuario): Promise<Usuario> {
     const usuarioInDb = await this.usuarioRepository.findOne({
@@ -58,11 +62,5 @@ export class UsuarioService {
   async delete(id: number): Promise<Usuario> {
     const entityDB: Usuario = await this.findById(id);
     return (await this.usuarioRepository.remove(entityDB)) as Usuario;
-  }
-
-  /* Login */
-  async login(module: { login: string; senha: string}): Promise<any> {
-    console.log(module);
-    return 1;
   }
 }

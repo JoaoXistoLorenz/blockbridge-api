@@ -6,11 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { TipoEscalabilidadeService } from './tipo-escalabilidade.service';
 import { Response } from '../configs/response.config';
 import { SafeResponse } from 'src/configs/utils.config';
 import { TipoEscalabilidade } from './tipo-escalabilidade.entity';
+import { JwtAuthGuard } from 'src/auth/auth.guard';
 
 @Controller('tipo-escalabilidade')
 export class TipoEscalabilidadeController {
@@ -32,8 +34,8 @@ export class TipoEscalabilidadeController {
     return new Response(tipoEscalabilidade, 'Escalabilidade Recuperado');
   }
 
-  /* Somente admin */
   @Post()
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async create(@Body() module: TipoEscalabilidade): Promise<Response> {
     return new Response(
@@ -42,8 +44,8 @@ export class TipoEscalabilidadeController {
     );
   }
 
-  /* Somente admin */
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async update(
     @Param('id') id: string,
@@ -55,8 +57,8 @@ export class TipoEscalabilidadeController {
     );
   }
 
-  /* Somente admin */
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async delete(@Param('id') id: string): Promise<Response> {
     await this.tipoEscalabilidadeService.delete(parseInt(id));

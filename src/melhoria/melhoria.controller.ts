@@ -3,14 +3,17 @@ import {
   Controller,
   Delete,
   Get,
+  Ip,
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { MelhoriaService } from './melhoria.service';
 import { Response } from '../configs/response.config';
 import { SafeResponse } from 'src/configs/utils.config';
 import { Melhoria } from './melhoria.entity';
+import { JwtAuthGuard } from 'src/auth/auth.guard';
 
 @Controller('melhoria')
 export class MelhoriaController {
@@ -30,18 +33,21 @@ export class MelhoriaController {
     return new Response(melhoria, 'Melhoria Recuperada');
   }
 
-  /* IP */
   @Post()
   @SafeResponse()
-  public async create(@Body() module: Melhoria): Promise<Response> {
+  public async create(
+    @Body() module: Melhoria,
+    @Ip() ip: any,
+  ): Promise<Response> {
+    module.ip = ip;
     return new Response(
       await this.melhoriaService.create(module),
       'Melhoria registrada com sucesso',
     );
   }
 
-  /* Somente admin */
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async update(
     @Param('id') id: string,
@@ -53,8 +59,8 @@ export class MelhoriaController {
     );
   }
 
-  /* Somente admin */
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async delete(@Param('id') id: string): Promise<Response> {
     await this.melhoriaService.delete(parseInt(id));

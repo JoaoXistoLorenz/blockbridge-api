@@ -6,11 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { PlataformaBlockchainService } from './plataforma-blockchain.service';
 import { Response } from '../configs/response.config';
 import { SafeResponse } from 'src/configs/utils.config';
 import { PlataformaBlockchain } from './plataforma-blockchain.entity';
+import { JwtAuthGuard } from 'src/auth/auth.guard';
 
 @Controller('plataforma-blockchain')
 export class PlataformaBlockchainController {
@@ -40,8 +42,8 @@ export class PlataformaBlockchainController {
     );
   }
 
-  /* Somente admin */
   @Post()
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async create(@Body() module: PlataformaBlockchain): Promise<Response> {
     return new Response(
@@ -50,8 +52,8 @@ export class PlataformaBlockchainController {
     );
   }
 
-  /* Somente admin */
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async update(
     @Param('id') id: string,
@@ -63,8 +65,8 @@ export class PlataformaBlockchainController {
     );
   }
 
-  /* Somente admin */
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async delete(@Param('id') id: string): Promise<Response> {
     await this.plataformaBlockchainService.delete(parseInt(id));

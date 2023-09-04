@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Blockchain } from 'src/blockchain/blockchain.entity';
-import { Plataforma } from 'src/plataforma/plataforma.entity';
+import { Blockchain } from '../blockchain/blockchain.entity';
+import { Plataforma } from '../plataforma/plataforma.entity';
 import {
   BaseEntity,
   Entity,

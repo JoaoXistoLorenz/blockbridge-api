@@ -6,18 +6,20 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { Response } from '../configs/response.config';
 import { SafeResponse } from 'src/configs/utils.config';
 import { Usuario } from './usuario.entity';
+import { JwtAuthGuard } from 'src/auth/auth.guard';
 
 @Controller('usuario')
 export class UsuarioController {
   constructor(private usuarioService: UsuarioService) {}
 
-  /* somente admin */
   @Get('')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async search(): Promise<Response> {
     const usuarios = await this.usuarioService.search();
@@ -27,8 +29,8 @@ export class UsuarioController {
     return new Response(usuarios, 'Usuarios Recuperadas');
   }
 
-  /* somente admin */
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async findById(@Param('id') id: string): Promise<Response> {
     const usuario = await this.usuarioService.findById(parseInt(id));
@@ -36,19 +38,8 @@ export class UsuarioController {
     return new Response(usuario, 'Usuario Recuperado');
   }
 
-  @Post('/login')
-  @SafeResponse()
-  public async login(
-    @Body() module: { login: string; senha: string },
-  ): Promise<Response> {
-    return new Response(
-      await this.usuarioService.login(module),
-      'Usuario registrado com sucesso',
-    );
-  }
-
-  /* somente admin */
   @Post()
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async create(@Body() module: Usuario): Promise<Response> {
     return new Response(
@@ -57,8 +48,8 @@ export class UsuarioController {
     );
   }
 
-  /* Somente admin */
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async update(
     @Param('id') id: string,
@@ -70,8 +61,8 @@ export class UsuarioController {
     );
   }
 
-  /* Somente admin */
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async delete(@Param('id') id: string): Promise<Response> {
     await this.usuarioService.delete(parseInt(id));

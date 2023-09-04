@@ -8,6 +8,8 @@ import { TipoMenuModule } from './tipo-menu/tipo-menu.module';
 import { TipoEscalabilidadeModule } from './tipo-escalabilidade/tipo-escalabilidade.module';
 import { PlataformaModule } from './plataforma/plataforma.module';
 import { PlataformaBlockchainModule } from './plataforma-blockchain/plataforma-blockchain.module';
+import { LinkModule } from './link/link.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { PlataformaBlockchainModule } from './plataforma-blockchain/plataforma-b
     TipoEscalabilidadeModule,
     PlataformaModule,
     PlataformaBlockchainModule,
+    LinkModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

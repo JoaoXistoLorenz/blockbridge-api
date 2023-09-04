@@ -27,18 +27,37 @@ export class PlataformaService {
       where: {
         tipoMenu: {id},
       },
+      order: {
+        nome: 'ASC',
+      }
     });
+  }
+
+  shuffle(array: any[]): any[] {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
   }
 
   /* Recupera por tipo menu */
   async findByTipoMenuLimit(idMenu: number, idPlataforma: number): Promise<Plataforma[]> {
-    return await this.plataformaRepository.find({ 
+    const plataformasReturn: Plataforma[] = [];
+    const plataformas: Plataforma[] = await this.plataformaRepository.find({ 
       where: {
         id: Not(idPlataforma),
         tipoMenu: { id: idMenu},
       },
-      take: 6,
     });
+    if (plataformas.length >= 3) {
+      const shuffledPlataformas = this.shuffle(plataformas);
+      plataformasReturn.push(...shuffledPlataformas.slice(0, 3));
+    } else {
+      plataformasReturn.push(...plataformas);
+    }
+    return plataformasReturn;
   }
 
   /* Recupera por tipo escalabilidade */
@@ -58,9 +77,6 @@ export class PlataformaService {
       },
     });
   }
-
-  /* Recuperar por blockchain */
-  /* ================================================================== */
 
   /* Cria */
   async create(newPlataforma: Plataforma): Promise<Plataforma> {

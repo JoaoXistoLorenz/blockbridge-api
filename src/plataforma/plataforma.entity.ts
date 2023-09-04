@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { PlataformaBlockchain } from 'src/plataforma-blockchain/plataforma-blockchain.entity';
-import { TipoEscalabilidade } from 'src/tipo-escalabilidade/tipo-escalabilidade.entity';
-import { TipoMenu } from 'src/tipo-menu/tipo-menu.entity';
+import { TipoEscalabilidade } from '../tipo-escalabilidade/tipo-escalabilidade.entity';
+import { TipoMenu } from '../tipo-menu/tipo-menu.entity';
+import { PlataformaBlockchain } from '../plataforma-blockchain/plataforma-blockchain.entity';
+import { Link } from '../link/link.entity';
 
 import {
   BaseEntity,
@@ -67,7 +68,22 @@ export class Plataforma extends BaseEntity {
   @Column({ nullable: true, type: 'varchar'})
   urlcoinbase: string;
 
+  @Column({ nullable: true, type: 'varchar'})
+  urlexp: string;
+  
+  @Column({ nullable: true, type: 'varchar'})
+  urlcert: string;
+
+  @Column({ nullable: true, type: 'varchar'})
+  urlyoutube: string;
+
+  @Column({ nullable: true, type: 'varchar'})
+  urldef: string;
+
   @OneToMany(() => PlataformaBlockchain, (plataformaBlockchain) => plataformaBlockchain.idPlataforma, { cascade: true, eager: true })
   blockchains: PlataformaBlockchain[];
+
+  @OneToMany(() => Link, (link) => link.plataforma, { cascade: true, eager: true })
+  links: Link[];
 }
     

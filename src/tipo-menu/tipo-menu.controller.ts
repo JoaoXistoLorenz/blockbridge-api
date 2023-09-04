@@ -6,11 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { TipoMenuService } from './tipo-menu.service';
 import { Response } from '../configs/response.config';
 import { SafeResponse } from 'src/configs/utils.config';
 import { TipoMenu } from './tipo-menu.entity';
+import { JwtAuthGuard } from 'src/auth/auth.guard';
 
 @Controller('tipo-menu')
 export class TipoMenuController {
@@ -30,8 +32,8 @@ export class TipoMenuController {
     return new Response(tipoMenu, 'Menu Recuperado');
   }
 
-  /* Somente admin */
   @Post()
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async create(@Body() module: TipoMenu): Promise<Response> {
     return new Response(
@@ -40,8 +42,8 @@ export class TipoMenuController {
     );
   }
 
-  /* Somente admin */
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async update(
     @Param('id') id: string,
@@ -53,8 +55,8 @@ export class TipoMenuController {
     );
   }
 
-  /* Somente admin */
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async delete(@Param('id') id: string): Promise<Response> {
     await this.tipoMenuService.delete(parseInt(id));
