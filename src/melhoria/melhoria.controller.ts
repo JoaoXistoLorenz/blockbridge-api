@@ -20,6 +20,7 @@ export class MelhoriaController {
   constructor(private melhoriaService: MelhoriaService) {}
 
   @Get('')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async search(): Promise<Response> {
     const melhorias = await this.melhoriaService.search();
@@ -27,6 +28,7 @@ export class MelhoriaController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   @SafeResponse()
   public async findById(@Param('id') id: string): Promise<Response> {
     const melhoria = await this.melhoriaService.findById(parseInt(id));

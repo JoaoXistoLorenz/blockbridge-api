@@ -38,4 +38,13 @@ export class PlataformaBlockchainService {
     const entityDB: PlataformaBlockchain = await this.findById(id);
     return (await this.plataformaBlockchainRepository.remove(entityDB)) as PlataformaBlockchain;
   }
+
+  async deleteByPlataforma(id: number): Promise<void> {
+    await this.plataformaBlockchainRepository
+      .createQueryBuilder()
+      .delete()
+      .from(PlataformaBlockchain)
+      .where("idPlataforma = :id", { id })
+      .execute();
+  }
 }

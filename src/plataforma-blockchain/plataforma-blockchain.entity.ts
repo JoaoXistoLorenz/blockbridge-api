@@ -18,6 +18,6 @@ export class PlataformaBlockchain extends BaseEntity {
   @ManyToOne(() => Blockchain, (blockchain) => blockchain.id, { eager: true })
   idBlockchain: Blockchain;
 
-  @ManyToOne(() => Plataforma, (plataforma) => plataforma.id, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Plataforma, (plataforma) => plataforma.id, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   idPlataforma: Plataforma;
 }
