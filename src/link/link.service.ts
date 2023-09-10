@@ -48,4 +48,14 @@ export class LinkService {
     const entityDB: Link = await this.findById(id);
     return (await this.linkRepository.remove(entityDB)) as Link;
   }
+
+  /* Exclui links nulos */
+  async deleteNull(): Promise<void> {
+    await this.linkRepository
+      .createQueryBuilder()
+      .delete()
+      .from(Link)
+      .where("plataforma IS NULL")
+      .execute();
+  }
 }

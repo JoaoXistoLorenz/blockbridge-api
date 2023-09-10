@@ -39,6 +39,7 @@ export class PlataformaBlockchainService {
     return (await this.plataformaBlockchainRepository.remove(entityDB)) as PlataformaBlockchain;
   }
 
+  /* Exclui por plataforma */
   async deleteByPlataforma(id: number): Promise<void> {
     await this.plataformaBlockchainRepository
       .createQueryBuilder()

@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Plataforma } from './plataforma.entity';
 import { ILike, Not, Repository } from 'typeorm';
 import { PlataformaBlockchainService } from 'src/plataforma-blockchain/plataforma-blockchain.service';
+import { LinkService } from 'src/link/link.service';
 
 @Injectable()
 export class PlataformaService {
@@ -11,6 +12,7 @@ export class PlataformaService {
     @InjectRepository(Plataforma)
     private plataformaRepository: Repository<Plataforma>,
     private plataformaBlockchainService: PlataformaBlockchainService,
+    private linkService: LinkService,
   ) {}
   
   /* Recupera todos */
@@ -106,6 +108,7 @@ export class PlataformaService {
       throw new HttpException(`Plataforma já existe!`, HttpStatus.CONFLICT);
     }
     await this.plataformaBlockchainService.deleteByPlataforma(entity.id);
+    await this.linkService.deleteNull();
     const entityDB: Plataforma = await this.findById(id);
     return await (this.plataformaRepository.save({ ...entityDB, ...entity })) as Plataforma;
   }
@@ -113,6 +116,9 @@ export class PlataformaService {
   /* Exclui */
   async delete(id: number): Promise<Plataforma> {
     const entityDB: Plataforma = await this.findById(id);
-    return (await this.plataformaRepository.remove(entityDB)) as Plataforma;
+    await this.plataformaBlockchainService.deleteByPlataforma(entityDB.id);
+    const aux: any = (await this.plataformaRepository.remove(entityDB)) as Plataforma;
+    await this.linkService.deleteNull();
+    return aux;
   }
 }
