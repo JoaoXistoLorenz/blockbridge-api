@@ -35,51 +35,6 @@ export class Plataforma extends BaseEntity {
   @Column({ nullable: false, type: 'varchar'})
   imagem: string;
 
-  @Column({ nullable: false, type: 'varchar'})
-  urlsite: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urlgit: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urldoc: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urlinsta: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urltel: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urltwt: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urldisc: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urlcap: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urltrading: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urlbinance: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urlcoinbase: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urlexp: string;
-  
-  @Column({ nullable: true, type: 'varchar'})
-  urlcert: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urlyoutube: string;
-
-  @Column({ nullable: true, type: 'varchar'})
-  urldef: string;
-
   @OneToMany(() => PlataformaBlockchain, (plataformaBlockchain) => plataformaBlockchain.idPlataforma, { cascade: true, eager: true })
   blockchains: PlataformaBlockchain[];
 

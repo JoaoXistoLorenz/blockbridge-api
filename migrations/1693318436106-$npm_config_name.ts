@@ -38,6 +38,18 @@ export class $npmConfigName1693318436106 implements MigrationInterface {
     await queryRunner.query(
       `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (12,'Cartesi', 'CTSI', '', '', '')`,
     );
+    await queryRunner.query(
+      `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (13,'Bitcoin', 'BTC', '', '', '')`,
+    );
+    await queryRunner.query(
+      `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (14,'Gnosis', 'GNO', '', '', '')`,
+    );
+    await queryRunner.query(
+      `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (15,'Near', 'GNO', '', '', '')`,
+    );
+    await queryRunner.query(
+      `INSERT INTO blockchain ("id", "nome", "sigla", "descricao", "url", "imagem") VALUES (16,'Tron', 'Tron', '', '', '')`,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

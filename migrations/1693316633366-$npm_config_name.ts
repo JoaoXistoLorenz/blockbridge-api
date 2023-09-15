@@ -11,7 +11,7 @@ export class  $npmConfigName1693316633366 implements MigrationInterface {
       await queryRunner.query(`INSERT INTO tipo_menu ("id", "nome") VALUES (5,'NFTs')`);
 
       await queryRunner.query(`INSERT INTO tipo_escalabilidade ("id", "nome") VALUES (1,'Ponte')`);
-      await queryRunner.query(`INSERT INTO tipo_escalabilidade ("id", "nome") VALUES (2,'Plasma')`);
+      await queryRunner.query(`INSERT INTO tipo_escalabilidade ("id", "nome") VALUES (2,'Sidechain')`);
       await queryRunner.query(`INSERT INTO tipo_escalabilidade ("id", "nome") VALUES (3,'Rollup Otimista')`);
       await queryRunner.query(`INSERT INTO tipo_escalabilidade ("id", "nome") VALUES (4,'Rollup ZK')`);
       await queryRunner.query(`INSERT INTO tipo_escalabilidade ("id", "nome") VALUES (5,'Validium')`);

@@ -32,7 +32,7 @@ export class PlataformaService {
         tipoMenu: {id},
       },
       order: {
-        nome: 'ASC',
+        id: 'ASC',
       }
     });
   }
@@ -55,9 +55,9 @@ export class PlataformaService {
         tipoMenu: { id: idMenu},
       },
     });
-    if (plataformas.length >= 3) {
+    if (plataformas.length >= 6) {
       const shuffledPlataformas = this.shuffle(plataformas);
-      plataformasReturn.push(...shuffledPlataformas.slice(0, 3));
+      plataformasReturn.push(...shuffledPlataformas.slice(0, 6));
     } else {
       plataformasReturn.push(...plataformas);
     }
