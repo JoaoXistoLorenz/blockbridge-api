@@ -40,5 +40,14 @@ export class Plataforma extends BaseEntity {
 
   @OneToMany(() => Link, (link) => link.plataforma, { cascade: true, eager: true })
   links: Link[];
+
+  @Column({ nullable: true, type: 'varchar'})
+  idcoinmarketcap: string;
+
+  @Column({ nullable: true, type: 'varchar'})
+  simbolotrading: string;
+
+  @Column({ nullable: true, type: 'varchar'})
+  cryptopanic: string;
 }
     
