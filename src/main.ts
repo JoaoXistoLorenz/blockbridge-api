@@ -13,6 +13,7 @@ async function bootstrap() {
     cors: true,
     httpsOptions,
   });
+
   await app.listen(3000);
 }
 bootstrap();

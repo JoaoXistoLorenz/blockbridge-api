@@ -49,5 +49,8 @@ export class Plataforma extends BaseEntity {
 
   @Column({ nullable: true, type: 'varchar'})
   cryptopanic: string;
+
+  @Column({ nullable: true, type: 'varchar'})
+  tvl: string;
 }
     
